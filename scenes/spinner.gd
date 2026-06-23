@@ -7,7 +7,9 @@ enum State {
 	Disaled
 }
 
-@export var spin_duration := 3
+const THREE_TIMES_SPIN_DEG = 360 * 3
+
+@export var spin_duration := 2
 @export var cooldown := 1
 @export var cost = 5
 @export var type:SpinnerConfig.SpinnerType = SpinnerConfig.SpinnerType.Plus1
@@ -47,44 +49,62 @@ func _on_pressed() -> void:
 	if state != State.Idle: 
 		return
 		
+	disabled = true
 	spin()
 	
 func spin():
-	var resulted_area = get_resulted_area()
+	var result = randf_range(0,360.0)
+	print("result", result)
+	state = State.Spinning
+	await spin_animation(result)
+	
+	var resulted_area = get_resulted_area(result)
 	if not resulted_area:
 		print("nothing hit")
 		return
 		
-	state = State.Spinning
-	var result = resulted_area.apply(GameManager.currrent_coins)
-	await spin_animation(result)
-	GameManager.update_coins(result)
+	var coins_diff = resulted_area.apply()
+	GameManager.update_coins(coins_diff)
+	await resulted_area.animate()
 	colldown_start()
 	
 func colldown_start():
 	state = State.Cooldown
+	modulate = Color("dddddd")
 	await get_tree().create_timer(cooldown).timeout
 	state = State.Idle
-	
+	disabled = false
+	modulate = Color.WHITE
 	
 func spin_animation(result:float):
 	var tween = get_tree().create_tween()
 	tween.set_trans(Tween.TRANS_SINE)
-	tween.tween_property(pin,"rotation_degrees",270, spin_duration)
-	return tween.finished
+	tween.tween_property(pin,"rotation_degrees",THREE_TIMES_SPIN_DEG + result, spin_duration)
+	await tween.finished
+	pin.rotation_degrees = result
+	return
 	
-func get_resulted_area() -> SpinnerArea:
-	var result = randf_range(0,360.0)
+func get_resulted_area(result:float) -> SpinnerArea:
 	for area in areas:
 		var normalized_start_angle = area.start_angle
+		var normalize_end_angle = area.end_angle
+		var passes_360 = false
+		
 		if normalized_start_angle < 0:
 			normalized_start_angle += 360
 			
-		var normalize_end_angle = area.end_angle
 		if normalize_end_angle < 0:
 			normalize_end_angle += 360
 			
+		if normalized_start_angle > normalize_end_angle:
+			passes_360 = true
+			
 		if normalized_start_angle <= result and normalize_end_angle >= result:
 			return area
+			
+		if passes_360:
+			if normalized_start_angle <= result or normalize_end_angle>= result:
+				return area
+		
 	print("Didn't hit anything: ",result)
 	return

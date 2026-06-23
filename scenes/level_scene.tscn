@@ -1,7 +1,106 @@
 [gd_scene format=3 uid="uid://b434yxw4g64sq"]
 
 [ext_resource type="PackedScene" uid="uid://wpn42w4drv1c" path="res://scenes/spinner.tscn" id="1_386oa"]
+[ext_resource type="Texture2D" uid="uid://dwlejk8xr3wmr" path="res://assets/kenney_background-elements-remastered/Backgrounds/backgroundEmpty.png" id="1_bl4ss"]
+[ext_resource type="PackedScene" uid="uid://di23hmikmx5ln" path="res://scenes/score_scene.tscn" id="2_fkwfp"]
+[ext_resource type="FontFile" uid="uid://du3sker3yf52r" path="res://assets/kenney_ui-pack/Font/Kenney Future Narrow.ttf" id="4_c8xsp"]
 
 [node name="LevelScene" type="Node2D" unique_id=840399526]
 
-[node name="Spinner" parent="." unique_id=1592316764 instance=ExtResource("1_386oa")]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1646201112]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=2004364735]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bl4ss")
+expand_mode = 3
+stretch_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1458432724]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=988055713]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ScoreScene" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=974661218 instance=ExtResource("2_fkwfp")]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=1213574820]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="SpinnerContainer" type="FlowContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=825967791]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+
+[node name="Spinner" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/SpinnerContainer" unique_id=1592316764 instance=ExtResource("1_386oa")]
+layout_mode = 2
+
+[node name="Spinner2" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/SpinnerContainer" unique_id=686088403 instance=ExtResource("1_386oa")]
+layout_mode = 2
+
+[node name="Spinner3" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/SpinnerContainer" unique_id=1452954322 instance=ExtResource("1_386oa")]
+layout_mode = 2
+
+[node name="Spinner4" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/SpinnerContainer" unique_id=1958977242 instance=ExtResource("1_386oa")]
+layout_mode = 2
+
+[node name="Spinner5" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/SpinnerContainer" unique_id=183873193 instance=ExtResource("1_386oa")]
+layout_mode = 2
+type = 1
+
+[node name="Spinner6" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/SpinnerContainer" unique_id=255734985 instance=ExtResource("1_386oa")]
+layout_mode = 2
+type = 1
+
+[node name="Spinner7" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/SpinnerContainer" unique_id=432497863 instance=ExtResource("1_386oa")]
+layout_mode = 2
+type = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer" unique_id=270312790]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+stretch_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/TextureRect" unique_id=1137027305]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/TextureRect/VBoxContainer" unique_id=1085764900]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.20010456, 0.15084115, 0.16043347, 1)
+theme_override_fonts/font = ExtResource("4_c8xsp")
+theme_override_font_sizes/font_size = 32
+text = "Shop"
+horizontal_alignment = 1
+
+[node name="ShopSpinners" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/TextureRect/VBoxContainer" unique_id=714670806]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/TextureRect/VBoxContainer/ShopSpinners" unique_id=1165371859]
+layout_mode = 2
+
+[node name="Spinner" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/TextureRect/VBoxContainer/ShopSpinners/HBoxContainer" unique_id=652409560 instance=ExtResource("1_386oa")]
+layout_mode = 2
+state = 3

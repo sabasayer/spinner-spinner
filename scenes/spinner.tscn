@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://wpn42w4drv1c"]
 
 [ext_resource type="Script" uid="uid://tahtm1gnlw8a" path="res://scenes/spinner.gd" id="1_78gc6"]
-[ext_resource type="Texture2D" uid="uid://6kmrwwn73lht" path="res://assets/kenney_ui-pack/PNG/Extra/Double/button_round_line.png" id="1_kry60"]
+[ext_resource type="Texture2D" uid="uid://cmjub54wetyan" path="res://assets/kenney_ui-pack/PNG/Yellow/Double/button_round_flat.png" id="1_beaw0"]
 [ext_resource type="PackedScene" uid="uid://d2k2r8j6delnv" path="res://scenes/spinner_area.tscn" id="3_beaw0"]
 [ext_resource type="Texture2D" uid="uid://cvsnhp4lympwf" path="res://assets/kenney_ui-pack/PNG/Red/Double/arrow_decorative_e.png" id="4_beaw0"]
 
 [node name="Spinner" type="TextureButton" unique_id=1592316764]
-offset_right = 8.0
-offset_bottom = 8.0
-texture_normal = ExtResource("1_kry60")
+offset_right = 128.0
+offset_bottom = 128.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("1_beaw0")
 script = ExtResource("1_78gc6")
 
 [node name="AreaContainer" type="Control" parent="." unique_id=687840798]
@@ -19,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="SpinnerArea" parent="AreaContainer" unique_id=1217255147 instance=ExtResource("3_beaw0")]
 position = Vector2(64, 64)

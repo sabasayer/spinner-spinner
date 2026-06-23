@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://di23hmikmx5ln"]
+
+[ext_resource type="Script" uid="uid://upji108asjiv" path="res://scenes/score_scene.gd" id="1_jn2l2"]
+[ext_resource type="Texture2D" uid="uid://dnu2hnnf2n8fx" path="res://assets/kenney_ui-pack/PNG/Yellow/Default/button_round_depth_gradient.png" id="2_tyil2"]
+
+[sub_resource type="Animation" id="Animation_jn2l2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Container/Score:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Container/Score:theme_override_font_sizes/font_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [22]
+}
+
+[sub_resource type="Animation" id="Animation_tyil2"]
+resource_name = "score_change"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Container/Score:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Container/Score:theme_override_font_sizes/font_size")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0009999999, 0.26666668, 0.5),
+"transitions": PackedFloat32Array(1, 0.43527535, 1),
+"update": 0,
+"values": [22, 35, 22]
+}
+
+[sub_resource type="Animation" id="Animation_eebjh"]
+resource_name = "score_change_big"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Container/Score:theme_override_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.78431374, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Container/Score:theme_override_font_sizes/font_size")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0009999999, 0.26666668, 0.5),
+"transitions": PackedFloat32Array(1, 0.43527535, 1),
+"update": 0,
+"values": [22, 46, 22]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eebjh"]
+_data = {
+&"RESET": SubResource("Animation_jn2l2"),
+&"score_change": SubResource("Animation_tyil2"),
+&"score_change_big": SubResource("Animation_eebjh")
+}
+
+[node name="ScoreScene" type="Control" unique_id=666522645]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_jn2l2")
+
+[node name="Container" type="HBoxContainer" parent="." unique_id=1223121713]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -53.0
+offset_right = 53.0
+offset_bottom = 32.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Container" unique_id=474870871]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 0
+texture = ExtResource("2_tyil2")
+expand_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Container" unique_id=1719758048]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_type_variation = &"HeaderSmall"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Coins"
+
+[node name="Score" type="Label" parent="Container" unique_id=1361955655]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 22
+text = "0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1059851643]
+libraries/ = SubResource("AnimationLibrary_eebjh")

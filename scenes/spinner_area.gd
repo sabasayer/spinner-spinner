@@ -40,16 +40,16 @@ enum AreaType { EMPTY, EARN_FIXED, LOSE_FIXED }
 		amount = value
 		queue_redraw()
 
-func apply(coins: int) -> int:
+func apply() -> int:
 	match type:
 		AreaType.EARN_FIXED:
-			return coins + amount
+			return amount
 		AreaType.LOSE_FIXED:
-			return max(0, coins - amount)
+			return  -amount
 		AreaType.EMPTY:
-			return coins
+			return 0
 		_:
-			return coins
+			return 0
 
 		
 func _ready() -> void:
@@ -93,3 +93,10 @@ func draw_effect(points:Array):
 		
 	var middlePoint = points[detail / 2]
 	draw_string(ThemeDB.fallback_font,middlePoint / 2, text,HORIZONTAL_ALIGNMENT_CENTER, -1, 12)
+
+func animate():
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(self,"scale",Vector2(1.2,1.2),0.5)
+	tween.tween_property(self,"scale",Vector2.ONE, 0.3)
+	return tween.finished
