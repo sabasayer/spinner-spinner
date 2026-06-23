@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://wpn42w4drv1c"]
+
+[ext_resource type="Script" uid="uid://tahtm1gnlw8a" path="res://scenes/spinner.gd" id="1_78gc6"]
+[ext_resource type="Texture2D" uid="uid://6kmrwwn73lht" path="res://assets/kenney_ui-pack/PNG/Extra/Double/button_round_line.png" id="1_kry60"]
+[ext_resource type="PackedScene" uid="uid://d2k2r8j6delnv" path="res://scenes/spinner_area.tscn" id="3_beaw0"]
+[ext_resource type="Texture2D" uid="uid://cvsnhp4lympwf" path="res://assets/kenney_ui-pack/PNG/Red/Double/arrow_decorative_e.png" id="4_beaw0"]
+
+[node name="Spinner" type="TextureButton" unique_id=1592316764]
+offset_right = 8.0
+offset_bottom = 8.0
+texture_normal = ExtResource("1_kry60")
+script = ExtResource("1_78gc6")
+
+[node name="AreaContainer" type="Control" parent="." unique_id=687840798]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpinnerArea" parent="AreaContainer" unique_id=1217255147 instance=ExtResource("3_beaw0")]
+position = Vector2(64, 64)
+radius = 62.0
+color = Color(0.92941177, 0.92941177, 0.92941177, 1)
+start_angle = -270.0
+end_angle = -90.0
+amount = 0
+
+[node name="SpinnerArea2" parent="AreaContainer" unique_id=2101567088 instance=ExtResource("3_beaw0")]
+position = Vector2(64, 64)
+radius = 62.0
+color = Color(0.27058825, 0.5254902, 0, 1)
+type = 1
+start_angle = -93.243
+end_angle = 90.07
+
+[node name="SpinnerArea3" parent="AreaContainer" unique_id=266810425 instance=ExtResource("3_beaw0")]
+position = Vector2(64, 64)
+radius = 62.0
+color = Color(0.8266968, 0.09947408, 0.18636554, 1)
+type = 2
+start_angle = -141.892
+end_angle = -85.08499999999998
+
+[node name="Pin" type="TextureRect" parent="." unique_id=2129004143]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(32, 32)
+texture = ExtResource("4_beaw0")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
