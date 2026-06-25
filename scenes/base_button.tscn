@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://c7xkod3adqq0p" path="res://assets/kenney_ui-pack/Vector/Grey/button_rectangle_gradient.svg" id="1_jkdjr"]
 [ext_resource type="Texture2D" uid="uid://dd2vjteguk51d" path="res://assets/kenney_ui-pack/Vector/Green/button_rectangle_line.svg" id="2_b1a7u"]
 [ext_resource type="Texture2D" uid="uid://dobi0ckx422is" path="res://assets/kenney_ui-pack/Vector/Red/button_rectangle_line.svg" id="3_etpvk"]
-[ext_resource type="Script" uid="uid://bs6fe43b0gtkv" path="res://scenes/base_button.gd" id="4_2gmqs"]
+[ext_resource type="Script" uid="uid://bmjvrul8e5ai2" path="res://scenes/base_button.gd" id="4_2gmqs"]
 [ext_resource type="FontFile" uid="uid://du3sker3yf52r" path="res://assets/kenney_ui-pack/Font/Kenney Future Narrow.ttf" id="5_85tei"]
 [ext_resource type="AudioStream" uid="uid://caqq5ao14ljw6" path="res://assets/kenney_ui-pack/Sounds/click-a.ogg" id="6_k5x3t"]
 

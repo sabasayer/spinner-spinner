@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://ba2p4ag2yd1aj"]
+
+[ext_resource type="PackedScene" uid="uid://wpn42w4drv1c" path="res://scenes/spinner.tscn" id="1_1d7d6"]
+[ext_resource type="Script" uid="uid://dtlbbglfab7bv" path="res://scenes/shop_item.gd" id="1_goysm"]
+[ext_resource type="Texture2D" uid="uid://dnu2hnnf2n8fx" path="res://assets/kenney_ui-pack/PNG/Yellow/Default/button_round_depth_gradient.png" id="2_goysm"]
+[ext_resource type="FontFile" uid="uid://o6br5f1hgvd5" path="res://assets/kenney_ui-pack/Font/Kenney Future.ttf" id="3_w0fhh"]
+[ext_resource type="Texture2D" uid="uid://bqud6c6j7405a" path="res://assets/kenney_ui-pack/Vector/Yellow/button_rectangle_flat.svg" id="4_gbrp1"]
+[ext_resource type="FontFile" uid="uid://du3sker3yf52r" path="res://assets/kenney_ui-pack/Font/Kenney Future Narrow.ttf" id="5_der01"]
+[ext_resource type="Texture2D" uid="uid://cij3g2pdkwgcd" path="res://assets/kenney_ui-pack/Vector/Grey/button_rectangle_border.svg" id="6_w0fhh"]
+
+[node name="ShopItem" type="HBoxContainer" unique_id=784289193]
+theme_override_constants/separation = 8
+script = ExtResource("1_goysm")
+
+[node name="Spinner" parent="." unique_id=1592316764 instance=ExtResource("1_1d7d6")]
+layout_mode = 2
+state = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1226422342]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=316956264]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 8
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=2032742212]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("2_goysm")
+expand_mode = 1
+
+[node name="CostLabel" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=133959851]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85490197, 0.29411766, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("3_w0fhh")
+theme_override_font_sizes/font_size = 20
+text = "3 coins"
+
+[node name="BuyButton" type="TextureButton" parent="VBoxContainer" unique_id=929776082]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_vertical = 6
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("4_gbrp1")
+texture_disabled = ExtResource("6_w0fhh")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="VBoxContainer/BuyButton" unique_id=594740900]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_der01")
+theme_override_font_sizes/font_size = 20
+text = "BUY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]

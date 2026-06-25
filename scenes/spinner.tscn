@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://cmjub54wetyan" path="res://assets/kenney_ui-pack/PNG/Yellow/Double/button_round_flat.png" id="1_beaw0"]
 [ext_resource type="PackedScene" uid="uid://d2k2r8j6delnv" path="res://scenes/spinner_area.tscn" id="3_beaw0"]
 [ext_resource type="Texture2D" uid="uid://cvsnhp4lympwf" path="res://assets/kenney_ui-pack/PNG/Red/Double/arrow_decorative_e.png" id="4_beaw0"]
+[ext_resource type="AudioStream" uid="uid://djuebxyl6tnna" path="res://assets/kenney_ui-pack/Sounds/click-b.ogg" id="5_6wjsw"]
+[ext_resource type="Texture2D" uid="uid://17rwqpqgfr3i" path="res://assets/kenney_ui-pack/PNG/Red/Double/icon_outline_cross.png" id="6_gjgub"]
 
 [node name="Spinner" type="TextureButton" unique_id=1592316764]
 offset_right = 128.0
@@ -59,8 +61,25 @@ offset_right = 32.0
 offset_bottom = 32.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.4, 0.4)
 pivot_offset = Vector2(32, 32)
 texture = ExtResource("4_beaw0")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=326999888]
+stream = ExtResource("5_6wjsw")
+
+[node name="SellButton" type="TextureButton" parent="." unique_id=2000945935]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -19.0
+offset_top = -17.0
+offset_right = 17.0
+offset_bottom = 19.0
+grow_horizontal = 0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_gjgub")
+
 [connection signal="pressed" from="." to="." method="_on_pressed"]
+[connection signal="pressed" from="SellButton" to="." method="_on_sell_button_pressed"]

@@ -9,25 +9,39 @@ enum State {
 
 const THREE_TIMES_SPIN_DEG = 360 * 3
 
-@export var spin_duration := 2
-@export var cooldown := 1
-@export var cost = 5
-@export var type:SpinnerConfig.SpinnerType = SpinnerConfig.SpinnerType.Plus1
+@export var spin_duration := 1.8
+@export var cooldown := 0.8
+@export var type:SpinnerConfig.SpinnerType = SpinnerConfig.SpinnerType.Plus1:
+		set(value):
+			type = value
+			setup()
+			
 @export var area:PackedScene = preload("res://scenes/spinner_area.tscn")
-@export var state: State = State.Idle
+@export var state: State = State.Idle:
+		set(value):
+			state = value
+			setup_sell_button()
 
 @onready var area_container: Control = %AreaContainer
 @onready var pin: TextureRect = $Pin
 
 @onready var areas: Array[SpinnerArea] = []
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+@onready var sell_button: TextureButton = $SellButton
 
 func _ready():
+	setup()
+		
+func setup():
 	if !area:
 		return
 		
 	var area_configs = SpinnerConfig.AREAS_PER_TYPE.get(type) as Array[Dictionary]
 	
 	if !area_configs:
+		return
+		
+	if !area_container:
 		return
 		
 	for child in area_container.get_children():
@@ -45,12 +59,29 @@ func _ready():
 		area_scene.position = Vector2(64,64)
 		areas.append(area_scene)
 		
+	setup_sell_button()
+		
+
+func setup_sell_button():
+	if !sell_button:
+		return
+		
+	sell_button.visible = state != State.Disaled
+		
 func _on_pressed() -> void:
+	if GameManager.game_state != GameManager.GAME_STATE.PLAYING:
+		return
+	
 	if state != State.Idle: 
 		return
 		
 	disabled = true
 	spin()
+	play_audio()
+	
+func play_audio():
+	var pitch := randf_range(0.9, 1.1)
+	GameManager.play_ui_click(audio_stream_player.stream, pitch)
 	
 func spin():
 	var result = randf_range(0,360.0)
@@ -65,6 +96,7 @@ func spin():
 		
 	var coins_diff = resulted_area.apply()
 	GameManager.update_coins(coins_diff)
+	animate_pin()
 	await resulted_area.animate()
 	colldown_start()
 	
@@ -108,3 +140,20 @@ func get_resulted_area(result:float) -> SpinnerArea:
 		
 	print("Didn't hit anything: ",result)
 	return
+
+func animate_pin():
+	var original_scale = pin.scale
+	var tween = get_tree().create_tween()
+	tween.set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(pin,"scale",original_scale * 1.2,0.5)
+	tween.tween_property(pin,"scale",original_scale, 0.3)
+	return tween.finished
+
+
+func _on_sell_button_pressed() -> void:
+	if state == State.Disaled:
+		return
+		
+	var sell_cost = SpinnerConfig.get_sell_cost(type)
+	GameManager.update_coins(sell_cost)
+	queue_free()
